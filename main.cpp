@@ -4,7 +4,7 @@
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 
-int main()
+int main(int argv, char** args)
 {
 	SDL_Window* window = NULL;
 	SDL_Surface* screenSurface = NULL;

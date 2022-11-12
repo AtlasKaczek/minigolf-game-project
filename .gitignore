@@ -35,3 +35,5 @@ dbus-1
 *.exe
 *.out
 *.app
+
+src/*
