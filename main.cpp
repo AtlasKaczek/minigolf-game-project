@@ -1,8 +1,14 @@
 #include <iostream>
 #include <SDL2/SDL.h>
 
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 480;
+const int SCREEN_WIDTH = 1920;
+const int SCREEN_HEIGHT = 1080;
+
+
+
+
+
+
 
 int main(int argv, char** args)
 {
@@ -30,8 +36,11 @@ int main(int argv, char** args)
 	}
 	
 
+
 	SDL_DestroyWindow( window );
 	SDL_Quit();
 
 	return 0;
 }
+
+
