@@ -36,4 +36,6 @@ dbus-1
 *.out
 *.app
 
-src/*
+src/include/*
+src/lib/*
+src/SDL2/*
