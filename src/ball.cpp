@@ -3,7 +3,6 @@
 #include "Tile.h"
 #include "Hole.h"
 #include "Math.h"
-//#include "cmath"
 
 #include <vector>
 #include <SDL2/SDL.h>
