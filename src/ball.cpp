@@ -90,7 +90,7 @@ void Ball::update(double deltaTime, bool mouseDown, bool mousePressed, std::vect
     }
     if (mouseDown && canMove)
     {
-        
+        std::cout << "Ball pos X: " << getPos().x << " Y: " << getPos().y << " scale W: " << getScale().x << " H: " << getScale().y << std::endl;
         int mouseX = 0;
 	    int mouseY = 0;
 	    SDL_GetMouseState(&mouseX, &mouseY);
