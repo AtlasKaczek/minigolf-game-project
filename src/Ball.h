@@ -59,8 +59,8 @@ private:
     bool playedSwingFx = true;
     int index;
     int strokes = 0;
-    int dirX = 1;
-    int dirY = 1;
+    float dirX = 1;
+    float dirY = 1;
     bool win = false;
     float friction = 0.001;
     std::vector<Entity> points;

@@ -3,6 +3,7 @@
 #include "Tile.h"
 #include "Hole.h"
 #include "Math.h"
+#include <math.h>
 
 #include <vector>
 #include <SDL2/SDL.h>
@@ -96,14 +97,14 @@ void Ball::update(double deltaTime, bool mouseDown, bool mousePressed, std::vect
 	    SDL_GetMouseState(&mouseX, &mouseY);
         setVelocity((mouseX - getInitialMousePos().x)/-150, (mouseY - getInitialMousePos().y)/-150);
         setLaunchedVelocity((mouseX - getInitialMousePos().x)/-150, (mouseY - getInitialMousePos().y)/-150);
-        velocity1D = SDL_sqrt(SDL_pow(labs(getVelocity().x), 2) + SDL_pow(labs(getVelocity().y), 2));
+        velocity1D = SDL_sqrt(SDL_pow(fabs(getVelocity().x), 2) + SDL_pow(fabs(getVelocity().y), 2));
         launchedVelocity1D = velocity1D;
  
         points.at(0).setPos(getPos().x, getPos().y + 8 - 32);
         points.at(0).setAngle(SDL_atan2(velocity.y, velocity.x)*(180/3.1415) + 90);
 
-        dirX = velocity.x/labs(velocity.x);
-        dirY = velocity.y/labs(velocity.y);
+        dirX = velocity.x/fabs(velocity.x);
+        dirY = velocity.y/fabs(velocity.y);
 
         powerBar.at(0).setPos(getPos().x + 32 + 8, getPos().y - 32);
         powerBar.at(1).setPos(getPos().x + 32 + 8 + 4, getPos().y - 32 + 4 + 32 - 32*powerBar.at(1).getScale().y);
@@ -129,11 +130,11 @@ void Ball::update(double deltaTime, bool mouseDown, bool mousePressed, std::vect
         setPos(getPos().x + getVelocity().x*deltaTime, getPos().y + getVelocity().y*deltaTime);
         if (getVelocity().x > 0.0001 || getVelocity().x < -0.0001 || getVelocity().y > 0.0001 || getVelocity().y < -0.0001)
         {
-            //float xDir = velocity.x/labs(velocity.x);
-            //float yDir = velocity.y/labs(velocity.y);
+            float xDir = velocity.x/fabs(velocity.x);
+            float yDir = velocity.y/fabs(velocity.y);
 
-            //velocity.x = (labs(velocity.x) - friction*deltaTime)*xDir;
-            //velocity.y = (labs(velocity.y) - friction*deltaTime)*yDir;
+            velocity.x = (fabs(velocity.x) - friction*deltaTime)*xDir;
+            velocity.y = (fabs(velocity.y) - friction*deltaTime)*yDir;
             if (velocity1D > 0)
             {
                 velocity1D -= friction*deltaTime;
@@ -142,8 +143,8 @@ void Ball::update(double deltaTime, bool mouseDown, bool mousePressed, std::vect
             {
                 velocity1D = 0;
             }
-            velocity.x = (velocity1D/launchedVelocity1D)*labs(launchedVelocity.x)*dirX;
-            velocity.y = (velocity1D/launchedVelocity1D)*labs(launchedVelocity.y)*dirY;
+            velocity.x = (velocity1D/launchedVelocity1D)*fabs(launchedVelocity.x)*dirX;
+            velocity.y = (velocity1D/launchedVelocity1D)*fabs(launchedVelocity.y)*dirY;
 
 
         }
@@ -159,22 +160,22 @@ void Ball::update(double deltaTime, bool mouseDown, bool mousePressed, std::vect
 
         if (getPos().x + getCurrentFrame().w > 640/(2 - index))
         {
-            setVelocity(-labs(getVelocity().x), getVelocity().y);
+            setVelocity(-fabs(getVelocity().x), getVelocity().y);
             dirX = -1;
         }
         else if (getPos().x < 0 + (index*320))
         {
-            setVelocity(labs(getVelocity().x), getVelocity().y);
+            setVelocity(fabs(getVelocity().x), getVelocity().y);
             dirX = 1;
         }
         else if (getPos().y + getCurrentFrame().h > 480)
         {
-            setVelocity(getVelocity().x, -labs(getVelocity().y));
+            setVelocity(getVelocity().x, -fabs(getVelocity().y));
             dirY = -1;
         }
         else if (getPos().y < 0)
         {
-            setVelocity(getVelocity().x, labs(getVelocity().y));
+            setVelocity(getVelocity().x, fabs(getVelocity().y));
             dirY = 1;
         }
 
