@@ -11,8 +11,8 @@
 #include "src/Tile.h"
 #include "src/Hole.h"
 
-const int SCREEN_WIDTH = 640 /*1920*/;
-const int SCREEN_HEIGHT = 480 /*1080*/;
+const int SCREEN_WIDTH = 640;
+const int SCREEN_HEIGHT = 480;
 
 bool init()
 {
@@ -60,7 +60,7 @@ TTF_Font* font48 = TTF_OpenFont("res/font/font.ttf", 48);
 TTF_Font* font24 = TTF_OpenFont("res/font/font.ttf", 24);
 
 
-Ball balls[2] = {Ball(Vector2f(0, 0), ballTexture, pointTexture, powerMeterTexture_FG, powerMeterTexture_BG, 0), Ball(Vector2f(0, 0), ballTexture, pointTexture, powerMeterTexture_FG, powerMeterTexture_BG, 1)};
+Ball balls = Ball(Vector2f(0, 0), ballTexture, pointTexture, powerMeterTexture_FG, powerMeterTexture_BG);
 std::vector<Hole> holes = {Hole(Vector2f(0, 0), holeTexture), Hole(Vector2f(0, 0), holeTexture)};
 
 std::vector<Tile> loadTiles(int level)
@@ -82,12 +82,56 @@ std::vector<Tile> loadTiles(int level)
 			temp.push_back(Tile(Vector2f(64*1 + 64*5, 64*3), tileLightTexture64));
 		break;
 		case 1:
-			temp.push_back(Tile(Vector2f(64*2, 64*3), tileDarkTexture64));
+			temp.push_back(Tile(Vector2f(64*5,64*2+32), tileDarkTexture64));
+			temp.push_back(Tile(Vector2f(64*4,64*2+32), tileLightTexture64));
+			temp.push_back(Tile(Vector2f(64*3,64*2+32), tileDarkTexture64));
+			temp.push_back(Tile(Vector2f(64*2,64*2+32), tileLightTexture64));
+			temp.push_back(Tile(Vector2f(64*6,64*2+32), tileLightTexture64));
+			temp.push_back(Tile(Vector2f(64*2,64+32), tileDarkTexture64));
+			temp.push_back(Tile(Vector2f(64*2,64), tileDarkTexture32));
+			temp.push_back(Tile(Vector2f(64*2+32,64), tileLightTexture32));
+			temp.push_back(Tile(Vector2f(64*2,0), tileDarkTexture64));
+			temp.push_back(Tile(Vector2f(64*6,64+32), tileDarkTexture64));
+			temp.push_back(Tile(Vector2f(64*6+32,64), tileDarkTexture32));
+			temp.push_back(Tile(Vector2f(64*6,64), tileLightTexture32));
+			temp.push_back(Tile(Vector2f(64*6,0), tileDarkTexture64));
 
-			temp.push_back(Tile(Vector2f(64*4 + 64*5, 64*3), tileLightTexture64));
+			temp.push_back(Tile(Vector2f(64*5,64*4), tileDarkTexture64));
+			temp.push_back(Tile(Vector2f(64*4,64*4), tileLightTexture64));
+			temp.push_back(Tile(Vector2f(64*3,64*4), tileDarkTexture64));
+			temp.push_back(Tile(Vector2f(64*2,64*4), tileLightTexture64));
+			temp.push_back(Tile(Vector2f(64*6,64*4), tileLightTexture64));
+			temp.push_back(Tile(Vector2f(64*6,64*5), tileDarkTexture64));
+			temp.push_back(Tile(Vector2f(64*6,64*6+32), tileDarkTexture64));
+			temp.push_back(Tile(Vector2f(64*6+32,64*6), tileDarkTexture32));
+			temp.push_back(Tile(Vector2f(64*6,64*6), tileLightTexture32));
+			temp.push_back(Tile(Vector2f(64*6,64*4), tileLightTexture64));
+			temp.push_back(Tile(Vector2f(64*2,64*5), tileDarkTexture64));
+			temp.push_back(Tile(Vector2f(64*2,64*6+32), tileDarkTexture64));
+			temp.push_back(Tile(Vector2f(64*2+32,64*6), tileLightTexture32));
+			temp.push_back(Tile(Vector2f(64*2,64*6), tileDarkTexture32));
 		break;
 		case 2:
-			temp.push_back(Tile(Vector2f(32*1 + 32*10 + 16, 32*5), tileLightTexture32));
+			temp.push_back(Tile(Vector2f(64*5,64*2+32), tileDarkTexture64));
+			temp.push_back(Tile(Vector2f(64*4,64*2+32), tileLightTexture64));
+			temp.push_back(Tile(Vector2f(64*3,64*2+32), tileDarkTexture64));
+			temp.push_back(Tile(Vector2f(64*2,64*2+32), tileLightTexture64));
+			temp.push_back(Tile(Vector2f(64*6,64*2+32), tileLightTexture64));
+			temp.push_back(Tile(Vector2f(64*2,64+32), tileDarkTexture64));
+			temp.push_back(Tile(Vector2f(64*2,0), tileDarkTexture64));
+			temp.push_back(Tile(Vector2f(64*6,64+32), tileDarkTexture64));
+			temp.push_back(Tile(Vector2f(64*6,0), tileDarkTexture64));
+
+			temp.push_back(Tile(Vector2f(64*5,64*4), tileDarkTexture64));
+			temp.push_back(Tile(Vector2f(64*4,64*4), tileLightTexture64));
+			temp.push_back(Tile(Vector2f(64*3,64*4), tileDarkTexture64));
+			temp.push_back(Tile(Vector2f(64*2,64*4), tileLightTexture64));
+			temp.push_back(Tile(Vector2f(64*6,64*4), tileLightTexture64));
+			temp.push_back(Tile(Vector2f(64*6,64*5), tileDarkTexture64));
+			temp.push_back(Tile(Vector2f(64*6,64*6+32), tileDarkTexture64));
+			temp.push_back(Tile(Vector2f(64*6,64*4), tileLightTexture64));
+			temp.push_back(Tile(Vector2f(64*2,64*5), tileDarkTexture64));
+			temp.push_back(Tile(Vector2f(64*2,64*6+32), tileDarkTexture64));
 		break;
 		case 3:
 			temp.push_back(Tile(Vector2f(32*4, 32*7), tileDarkTexture64));
@@ -150,48 +194,40 @@ void loadLevel(int level)
 		state = 2;
 		return;
 	}
-	balls[0].setVelocity(0, 0);
-	balls[1].setVelocity(0,0);
-    balls[0].setScale(1, 1);
-	balls[1].setScale(1, 1);
-	balls[0].setWin(false);
-	balls[1].setWin(false);
+	balls.setVelocity(0, 0);
+    balls.setScale(1, 1);
+	balls.setWin(false);
 
 	tiles = loadTiles(level);
 
 	switch (level)
 	{
 		case 0:
-			balls[0].setPos(24 + 32*4, 24 + 32*11);
-			balls[1].setPos(24 + 32*4 + 32*10, 24 + 32*11);
+			balls.setPos(32*10, 24 + 32*11);
 
-			holes.at(0).setPos(24 + 32*4, 22 + 32*2);
-			holes.at(1).setPos(24 + 32*4 + 32*10, 22 + 32*2);
+			holes.at(0).setPos(32*10, 22 + 32*2);
+			holes.at(1).setPos(32*10, 22 + 32*2);
 		break;
 		case 1:
-			balls[0].setPos(24 + 32*4, 24 + 32*11);
-			balls[1].setPos(24 + 32*4 + 32*10, 24 + 32*11);
+			balls.setPos(64, 64*4 - 22);
 
-			holes.at(0).setPos(24 + 32*4, 22 + 32*2);
-			holes.at(1).setPos(24 + 32*4 + 32*10, 22 + 32*2);
+			holes.at(0).setPos(64*8, 64*4 - 22);
+			holes.at(1).setPos(64*8, 64*4 - 22);
 		break;
 		case 2:
-			balls[0].setPos(8 + 32*7, 8 + 32*10);
-			balls[1].setPos(8 + 32*7 + 32*10, 8 + 32*10);
+			balls.setPos(64*5 - 40, 64*4 - 22);
 
-			holes.at(0).setPos(8 + 32*2, 6 + 32*5);
-			holes.at(1).setPos(8 + 32*4 + 32*10, 6 + 32*3);
+			holes.at(0).setPos(64*5 - 40, 64);
+			holes.at(1).setPos(64*5 - 40, 480-64);
 		break;
 		case 3:
-			balls[0].setPos(24 + 32*4, 24 + 32*5);
-			balls[1].setPos(24 + 32*4 + 32*10, 24 + 32*4);
+			balls.setPos(24 + 32*4, 24 + 32*5);
 
 			holes.at(0).setPos(24 + 32*4, 22 + 32*1);
 			holes.at(1).setPos(24 + 32*4 + 32*10, 22 + 32*11);
 		break;
 		case 4:	
-			balls[0].setPos(24 + 32*2, 24 + 32*12);
-			balls[1].setPos(24 + 32*0 + 32*10, 24 + 32*5);
+			balls.setPos(24 + 32*2, 24 + 32*12);
 
 			holes.at(0).setPos(24 + 32*1, 22 + 32*1);
 			holes.at(1).setPos(24 + 32*0 + 32*10, 22 + 32*7);
@@ -202,26 +238,15 @@ void loadLevel(int level)
 const char* getStrokeText()
 {
 	int biggestStroke = 0;
-	if (balls[1].getStrokes() > balls[0].getStrokes())
-	{
-		biggestStroke = balls[1].getStrokes();
-	}
-	else
-	{
-		biggestStroke = balls[0].getStrokes();
-	}
+	biggestStroke = balls.getStrokes();
 	std::string s = std::to_string(biggestStroke);
 	s = "STROKES: " + s;
 	return s.c_str();
 }
 
-const char* getLevelText(int side)
+const char* getLevelText()
 {
-	int tempLevel = (level + 1)*2 - 1;
-	if (side == 1)
-	{
-		tempLevel++;
-	}
+	int tempLevel = level + 1;
 	std::string s = std::to_string(tempLevel);
 	s = "HOLE: " + s;
 	return s.c_str();
@@ -236,7 +261,6 @@ void update()
 	deltaTime = (double)((currentTick - lastTick)*1000 / (double)SDL_GetPerformanceFrequency() );
 
 	mousePressed = false;
-	//Get our controls and events
 	while (SDL_PollEvent(&event))
 	{
 		switch(event.type)
@@ -262,11 +286,8 @@ void update()
 
 	if (state == 1)
 	{
-		for (Ball& b : balls)
-		{
-			b.update(deltaTime, mouseDown, mousePressed, tiles, holes, chargeSfx, swingSfx, holeSfx);
-		}
-		if (balls[0].getScale().x < -1 && balls[1].getScale().x < -1) // change it to only one ball
+		balls.update(deltaTime, mouseDown, mousePressed, tiles, holes, chargeSfx, swingSfx, holeSfx);
+		if (balls.getScale().x < -1)
  		{
         	level++;
 			loadLevel(level);
@@ -282,41 +303,30 @@ void graphics()
 	{
 		window.render(h);
 	}
-	for (Ball& b : balls)
+	if (!balls.isWin())
 	{
-		if (!b.isWin())
-		{
-			window.render(b.getPos().x, b.getPos().y + 4, ballShadowTexture);
-		}
-		for (Entity& e : b.getPoints())
-		{
-			window.render(e);
-		}
-		window.render(b);
+		window.render(balls.getPos().x, balls.getPos().y + 4, ballShadowTexture);
 	}
+	for (Entity &e : balls.getPoints())
+	{
+		window.render(e);
+	}
+	window.render(balls);
 	for (Tile& t : tiles)
 	{ 
 		window.render(t);
 	}
-	for (Ball& b : balls)
+	for (Entity &e : balls.getPowerBar())
 	{
-		for (Entity& e : b.getPowerBar())
-		{
-			window.render(e);
-		}
-		window.render(b.getPowerBar().at(0).getPos().x, b.getPowerBar().at(0).getPos().y, powerMeterTexture_overlay);
-		
+		window.render(e);
 	}
+	window.render(balls.getPowerBar().at(0).getPos().x, balls.getPowerBar().at(0).getPos().y, powerMeterTexture_overlay);
 	if (state != 2)
 	{
-		window.render(640/4 - 132/2, 480 - 32, levelTextBgTexture);
-		window.renderCenter(-160, 240 - 16 + 3, getLevelText(0), font24, black);
-		window.renderCenter(-160, 240 - 16, getLevelText(0), font24, white);
-
-		window.render(640/2 + 640/4 - 132/2, 480 - 32, levelTextBgTexture);
-		window.renderCenter(160, 240 - 16 + 3, getLevelText(1), font24, black);
-		window.renderCenter(160, 240 - 16, getLevelText(1), font24, white);
-
+		window.render(640/2 - 132/2, 480 - 32, levelTextBgTexture);
+		window.renderCenter(0, 240 - 16 + 3, getLevelText(), font24, black);
+		window.renderCenter(0, 240 - 16, getLevelText(), font24, white);
+		
 		window.render(640/2 - 196/2, 0, uiBgTexture);
 		window.renderCenter(0, -240 + 16 + 3, getStrokeText(), font24, black);
 		window.renderCenter(0, -240 + 16, getStrokeText(), font24, white);

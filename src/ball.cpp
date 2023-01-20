@@ -12,10 +12,9 @@
 #include <SDL2/SDL_mixer.h>
 
 
-Ball::Ball(Vector2f p_pos, SDL_Texture* p_tex, SDL_Texture* p_pointTex, SDL_Texture* p_powerMTexFG, SDL_Texture* p_powerMTexBG, int p_index)
+Ball::Ball(Vector2f p_pos, SDL_Texture* p_tex, SDL_Texture* p_pointTex, SDL_Texture* p_powerMTexFG, SDL_Texture* p_powerMTexBG)
 :Entity(p_pos, p_tex)
 {
-    index = p_index;
     points.push_back(Entity(Vector2f(-64, -64), p_pointTex));
     powerBar.push_back(Entity(Vector2f(-64, -64), p_powerMTexBG));
     powerBar.push_back(Entity(Vector2f(-64, -64), p_powerMTexFG));
@@ -91,7 +90,6 @@ void Ball::update(double deltaTime, bool mouseDown, bool mousePressed, std::vect
     }
     if (mouseDown && canMove)
     {
-        std::cout << "Ball pos X: " << getPos().x << " Y: " << getPos().y << " scale W: " << getScale().x << " H: " << getScale().y << std::endl;
         int mouseX = 0;
 	    int mouseY = 0;
 	    SDL_GetMouseState(&mouseX, &mouseY);
@@ -158,12 +156,12 @@ void Ball::update(double deltaTime, bool mouseDown, bool mousePressed, std::vect
             canMove = true;
         }
 
-        if (getPos().x + getCurrentFrame().w > 640/(2 - index))
+        if (getPos().x + getCurrentFrame().w > 640)
         {
             setVelocity(-fabs(getVelocity().x), getVelocity().y);
             dirX = -1;
         }
-        else if (getPos().x < 0 + (index*320))
+        else if (getPos().x < 0)
         {
             setVelocity(fabs(getVelocity().x), getVelocity().y);
             dirX = 1;
