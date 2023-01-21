@@ -4,6 +4,7 @@
 #include <SDL2/SDL_mixer.h>
 #include <iostream>
 #include <vector>
+#include <string.h>
 
 #include "src/RenderWindow.h"
 #include "src/Entity.h"
@@ -30,14 +31,14 @@ bool SDLinit = init();
 
 RenderWindow window("minigolf", SCREEN_WIDTH, SCREEN_HEIGHT);
 
-SDL_Texture* ballTexture = window.loadTexture("res/graphics/ball.png");
+SDL_Texture* ballTexture = window.loadTexture("res/graphics/pilka.png");
 SDL_Texture* holeTexture = window.loadTexture("res/graphics/hole.png");
-SDL_Texture* pointTexture = window.loadTexture("res/graphics/point.png");
+SDL_Texture* pointTexture = window.loadTexture("res/graphics/strzalka.png");
 SDL_Texture* tileDarkTexture32 = window.loadTexture("res/graphics/tile32_dark.png");
-SDL_Texture* tileDarkTexture64 = window.loadTexture("res/graphics/tile64_dark.png");
+SDL_Texture* tileDarkTexture64 = window.loadTexture("res/graphics/rozowy_blok.png");
 SDL_Texture* tileLightTexture32 = window.loadTexture("res/graphics/tile32_light.png");
-SDL_Texture* tileLightTexture64 = window.loadTexture("res/graphics/tile64_light.png");
-SDL_Texture* ballShadowTexture = window.loadTexture("res/graphics/ball_shadow.png");
+SDL_Texture* tileLightTexture64 = window.loadTexture("res/graphics/bialy_blok.png");
+SDL_Texture* ballShadowTexture = window.loadTexture("res/graphics/cien.png");
 SDL_Texture* bgTexture = window.loadTexture("res/graphics/bg.png");
 SDL_Texture* uiBgTexture = window.loadTexture("res/graphics/UI_bg.png");
 SDL_Texture* levelTextBgTexture = window.loadTexture("res/graphics/levelText_bg.png");
@@ -46,7 +47,7 @@ SDL_Texture* powerMeterTexture_BG = window.loadTexture("res/graphics/powermeter_
 SDL_Texture* powerMeterTexture_overlay = window.loadTexture("res/graphics/powermeter_overlay.png");
 SDL_Texture* logoTexture = window.loadTexture("res/graphics/logo.png");
 SDL_Texture* click2start = window.loadTexture("res/graphics/click2start.png");
-SDL_Texture* endscreenOverlayTexture = window.loadTexture("res/graphics/end.png");
+SDL_Texture* endscreenOverlayTexture = window.loadTexture("res/graphics/koniec.png");
 SDL_Texture* splashBgTexture = window.loadTexture("res/graphics/splashbg.png");
 
 Mix_Chunk* chargeSfx = Mix_LoadWAV("res/sounds/charge.mp3");
@@ -134,34 +135,39 @@ std::vector<Tile> loadTiles(int level)
 			temp.push_back(Tile(Vector2f(64*2,64*6+32), tileDarkTexture64));
 		break;
 		case 3:
-			temp.push_back(Tile(Vector2f(32*4, 32*7), tileDarkTexture64));
-			temp.push_back(Tile(Vector2f(32*3, 32*5), tileDarkTexture32));
-			temp.push_back(Tile(Vector2f(32*6, 32*3), tileDarkTexture32));
+			temp.push_back(Tile(Vector2f(64*2,0), tileDarkTexture64));
+			temp.push_back(Tile(Vector2f(64*7,0), tileDarkTexture64));
+			temp.push_back(Tile(Vector2f(64*2,64*6+32), tileDarkTexture64));
+			temp.push_back(Tile(Vector2f(64*7,64*6+32), tileDarkTexture64));
 
-			temp.push_back(Tile(Vector2f(32*4 + 64*5, 32*2), tileLightTexture64));
-			temp.push_back(Tile(Vector2f(32*3 + 32*10, 32*6), tileLightTexture32));
-			temp.push_back(Tile(Vector2f(32*6 + 32*10, 32*9), tileLightTexture32));
+			temp.push_back(Tile(Vector2f(64*2,64*2-32), tileLightTexture32));
+			temp.push_back(Tile(Vector2f(64*2,64*3-32), tileLightTexture32));
+			temp.push_back(Tile(Vector2f(64*2,64*4-32), tileLightTexture32));
+			temp.push_back(Tile(Vector2f(64*2,64*5-32), tileLightTexture32));
+			temp.push_back(Tile(Vector2f(64*2,64*6-32), tileLightTexture32));
+
+			temp.push_back(Tile(Vector2f(64*3+32,64*2), tileLightTexture32));
+			temp.push_back(Tile(Vector2f(64*3+32,64*3), tileLightTexture32));
+			temp.push_back(Tile(Vector2f(64*3+32,64*4), tileLightTexture32));
+			temp.push_back(Tile(Vector2f(64*3+32,64*5), tileLightTexture32));
+			temp.push_back(Tile(Vector2f(64*3+32,64*6), tileLightTexture32));
+			temp.push_back(Tile(Vector2f(64*3+32,64), tileLightTexture32));
+
+			temp.push_back(Tile(Vector2f(64*6,64*2), tileLightTexture32));
+			temp.push_back(Tile(Vector2f(64*6,64*3), tileLightTexture32));
+			temp.push_back(Tile(Vector2f(64*6,64*4), tileLightTexture32));
+			temp.push_back(Tile(Vector2f(64*6,64*5), tileLightTexture32));
+			temp.push_back(Tile(Vector2f(64*6,64*6), tileLightTexture32));
+			temp.push_back(Tile(Vector2f(64*6,64), tileLightTexture32));
+
+			temp.push_back(Tile(Vector2f(64*7+32,64*2-32), tileLightTexture32));
+			temp.push_back(Tile(Vector2f(64*7+32,64*3-32), tileLightTexture32));
+			temp.push_back(Tile(Vector2f(64*7+32,64*4-32), tileLightTexture32));
+			temp.push_back(Tile(Vector2f(64*7+32,64*5-32), tileLightTexture32));
+			temp.push_back(Tile(Vector2f(64*7+32,64*6-32), tileLightTexture32));
 		break;
 		case 4:
-			temp.push_back(Tile(Vector2f(32*3, 32*1), tileDarkTexture32));
-			temp.push_back(Tile(Vector2f(32*1, 32*3), tileDarkTexture32));
-			temp.push_back(Tile(Vector2f(32*5, 32*3), tileDarkTexture32));
-			temp.push_back(Tile(Vector2f(32*3, 32*5), tileDarkTexture32));
-			temp.push_back(Tile(Vector2f(32*7, 32*5), tileDarkTexture32));
-			temp.push_back(Tile(Vector2f(32*7, 32*10), tileDarkTexture32));
-			temp.push_back(Tile(Vector2f(32*3, 32*10), tileDarkTexture32));
-			temp.push_back(Tile(Vector2f(32*5, 32*12), tileDarkTexture32));
-			temp.push_back(Tile(Vector2f(32*7, 32*10), tileDarkTexture32));
-
-			//temp.push_back(Tile(Vector2f(32*4, 32*7), tileDarkTexture64));
-			temp.push_back(Tile(Vector2f(32*8, 32*7), tileDarkTexture64));
-
-			temp.push_back(Tile(Vector2f(32*2 + 32*10, 32*2), tileLightTexture32));
-			temp.push_back(Tile(Vector2f(32*5 + 32*10, 32*11), tileLightTexture32));
-
-			temp.push_back(Tile(Vector2f(32*3 + 32*10, 32*1), tileLightTexture64));
-			temp.push_back(Tile(Vector2f(32*8 + 32*10, 32*6), tileLightTexture64));
-			temp.push_back(Tile(Vector2f(32*3 + 32*10, 32*11), tileLightTexture64));
+			
 		break;
 	}
 	return temp;
@@ -221,16 +227,16 @@ void loadLevel(int level)
 			holes.at(1).setPos(64*5 - 40, 480-64);
 		break;
 		case 3:
-			balls.setPos(24 + 32*4, 24 + 32*5);
+			balls.setPos(64*5-8, 48*5-8);
 
-			holes.at(0).setPos(24 + 32*4, 22 + 32*1);
-			holes.at(1).setPos(24 + 32*4 + 32*10, 22 + 32*11);
+			holes.at(0).setPos(64*1-8, 48*5-8);
+			holes.at(1).setPos(64*9-8, 48*5-8);
 		break;
 		case 4:	
-			balls.setPos(24 + 32*2, 24 + 32*12);
+			balls.setPos(64*5-8, 48*5-8);
 
-			holes.at(0).setPos(24 + 32*1, 22 + 32*1);
-			holes.at(1).setPos(24 + 32*0 + 32*10, 22 + 32*7);
+			holes.at(0).setPos(64*1-8, 48*5-8);
+			holes.at(1).setPos(64*9-8, 48*5-8);
 		break;
 	}
 }
